@@ -1,0 +1,50 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 98vh;
+}
+
+.loader {
+    height: 15px;
+    aspect-ratio: 5;
+    display: flex;
+    justify-content: space-between;
+    --_g: no-repeat radial-gradient(farthest-side, #000 95%, #0000);
+    background:
+        var(--_g) calc(1*100%/3) 0,
+        var(--_g) calc(2*100%/3) 0;
+    background-size: 20% 100%;
+}
+
+.loader:before,
+.loader:after {
+    content: "";
+    height: inherit;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #000;
+    animation: l41 1s infinite;
+}
+
+.loader:after {
+    --s: -1, -1;
+}
+
+@keyframes l41 {
+    0% {
+        transform: scale(var(--s, 1)) translate(0, 0)
+    }
+
+    33% {
+        transform: scale(var(--s, 1)) translate(0, 130%)
+    }
+
+    66% {
+        transform: scale(var(--s, 1)) translate(400%, 130%)
+    }
+
+    100% {
+        transform: scale(var(--s, 1)) translate(400%, 0)
+    }
+}

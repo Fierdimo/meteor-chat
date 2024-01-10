@@ -1,0 +1,15 @@
+figcaption .none {
+    scale: 1;
+    opacity: 1;
+}
+
+figcaption .nonez {
+    scale: 0;
+    opacity: 0;
+}
+
+figcaption .zoom-in {
+    opacity: 1;
+    scale: 1;
+    transition: all 250ms ease-in-out;
+}

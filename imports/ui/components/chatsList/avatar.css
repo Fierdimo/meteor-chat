@@ -1,0 +1,56 @@
+:root {
+    --inset: 0.5vmin;
+    --color0: #0ac;
+    --color1: #222;
+    --duration: 5s;
+    --bgcolor0: #0aca;
+    --bgcolor1: #222a;
+}
+
+.com {
+    block-size: 7vmin;
+    inline-size: 7vmin;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px black, 0 0 10px black;
+    filter: drop-shadow(0 0 10px var(--color0)) saturate(2);
+    margin: 10px;
+    border-radius: 50%;
+}
+
+.th {
+    inline-size: 100%;
+    block-size: 100%;
+    overflow: hidden;
+    clip-path: circle(45.0% at 50% 50%);
+    border-radius: 50%;
+}
+
+.th img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.com::before {
+    content: '';
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    position: absolute;
+    background: repeating-conic-gradient(transparent, var(--color0) 25deg, var(--color1) 22.5deg, transparent 90deg);
+    animation: var(--duration) f linear infinite;
+    scale: 1.6;
+}
+
+@keyframes f {
+    0% {
+        rotate: 0
+    }
+
+    100% {
+        rotate: 1turn
+    }
+}
