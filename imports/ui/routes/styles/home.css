@@ -16,6 +16,7 @@
     overflow-y: auto;
     overflow-x: clip;
     scrollbar-gutter: stable;
+    background: linear-gradient(90deg, rgba(38,46,51,1) 0%, rgba(108,110,111,1) 73%, rgba(38,46,51,1) 100%);
 }
 
 .home-container>nav::-webkit-scrollbar {
@@ -32,12 +33,15 @@
 }
 
 .home-container>main {
-    background-color: blueviolet;
+    background-color: rgb(38, 46, 51);
     grid-area: main;
+    overflow-y: auto;
+    overflow-x: clip;
+    scrollbar-gutter: stable;
 }
 
 .home-container>footer {
-    background-color: chocolate;
+    background-color: rgb(38, 46, 51);
     grid-area: footer;
 }
 

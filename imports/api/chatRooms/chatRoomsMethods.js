@@ -1,10 +1,10 @@
 import { Meteor } from "meteor/meteor";
 import { ChatRoomsCollection } from "./chatRoomsCollection";
 
-const _id = Meteor.userId();
 
 Meteor.methods({
   add_chatroom_in_server({ contact, my_name }) {
+    const _id = Meteor.userId();
     const users_ids = [_id, contact.id];
     return ChatRoomsCollection.insert({
       users_ids,
@@ -17,6 +17,7 @@ Meteor.methods({
     return ChatRoomsCollection.findOne({ users_ids: { $all: users_ids } });
   },
   send_message(chat_id, text) {
+    const _id = Meteor.userId();
     const message = {
       text,
       user: _id,
@@ -35,6 +36,7 @@ Meteor.methods({
       ).fetch();
   },
   remove_chatroom_in_server(chat_id) {
+    const _id = Meteor.userId();
     ChatRoomsCollection.update({ _id: chat_id }, { $pull: { users_ids: _id } });
     const left_users = ChatRoomsCollection.findOne(
       { _id: chat_id },

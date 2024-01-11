@@ -49,4 +49,7 @@ Meteor.methods({
       )
       .fetch();
   },
+  get_user_image(_id){
+    return Meteor.users({_id},{image: 1}).image
+  }
 });
