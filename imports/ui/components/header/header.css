@@ -1,0 +1,23 @@
+.header-container{
+    display: flex;
+    direction: row;
+    flex: auto;
+}
+.header-container .logo{
+    display: flex;
+    direction: row;
+    align-items: center;
+    padding-left: 20px;
+}
+.header-container .actions{
+    display: flex;
+    direction: row;
+    flex: auto;
+    justify-content: right;
+    align-items: center;
+}
+.header-container .header-button{
+    background-color: transparent;
+    cursor: pointer;
+    padding: 5px;
+}

@@ -19,19 +19,15 @@ export default function Conversation({ chatId }: ConversationT) {
     const endScroll = document.getElementById("endScroll");
     endScroll?.scrollIntoView({ behavior: "instant" });
   }, []);
-
+  
   return (
     <>
       {chatId ? (
         <div id="conversation">
           {conversation.length > 0 &&
-            conversation.map((data, index) => {
-              const image = Meteor.call("get_user_image", data.user, (error) =>
-                error ? console.log(error.reason) : undefined
-              );
+            conversation.map((data, index) => {         
 
               const message = {
-                image,
                 message: data.message,
                 date: data.date,
                 user: data.user,

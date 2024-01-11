@@ -1,11 +1,11 @@
 import React from "react";
-import { Meteor } from "meteor/meteor";
 
 import "./styles/home.css";
 import ChatList from "../components/chatsList";
 import Conversation from "../components/conversation";
 import SendMessage from "../components/sendMessage";
 import { ChatContext } from "../context/chatContext";
+import Header from "../components/header";
 
 export default function Home() {
   const { chatId } = React.useContext(ChatContext); 
@@ -13,8 +13,7 @@ export default function Home() {
   return (
     <div className="home-container">
       <header>
-        <div>Home</div>
-        <button onClick={() => Meteor.logout()}>log out</button>
+        <div><Header /></div>        
       </header>
       <nav>
         <ChatList />

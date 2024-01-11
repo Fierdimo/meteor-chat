@@ -3,7 +3,6 @@ import "./conversation.css";
 
 type BubbleT = {
   data: {
-    image: string;
     message: string;
     date: Date;
     user: string;
@@ -12,6 +11,14 @@ type BubbleT = {
 
 export default function Bubble({ data }: BubbleT) {
   const isMe = data.user === "me";
+  const [image, setImage] = React.useState();
+
+  React.useEffect(() => {
+    Meteor.call("get_user_image", data.user, (error, data) =>
+      error ? console.log(error.reason) : setImage(data)
+    );
+  }, []);
+
   return (
     <div
       id="chatBubble"
@@ -22,7 +29,7 @@ export default function Bubble({ data }: BubbleT) {
       }}
     >
       <div className="image-capsule">
-        <img src={data.image} className="image-bubble" />
+        <img src={image} className="image-bubble" />
       </div>
       <div
         className="container-bubble"
