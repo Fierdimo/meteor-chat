@@ -3,39 +3,27 @@ import { ChatRoomsCollection } from "./chatRoomsCollection";
 
 
 Meteor.methods({
-  add_chatroom_in_server({ contact, my_name, chat_id }) {
-    const users_ids = [contact.id, Meteor.userId()];
+  add_chatroom({ contact_id, chat_id }) {
+    const users_ids = [contact_id, Meteor.userId()];
     return ChatRoomsCollection.insert({
       _id: chat_id,
       users_ids,
       messages: [],
-      names: [contact.email.split("@", 1), my_name],
       createdAt: new Date(),
     });
   },
-  thisChatExist(users_ids) {
-    return ChatRoomsCollection.findOne({ users_ids: { $all: users_ids } });
-  },
-  send_message(chat_id, text) {
-    const _id = Meteor.userId();
+  send_message(_id, content) {
     const message = {
-      text,
-      user: _id,
+      content,
+      user: Meteor.userId(),
       date: new Date(),
     };
     return ChatRoomsCollection.update(
-      { _id: chat_id },
+      { _id },
       { $push: { messages: message } }
     );
   },
-  chats_list(id_list) {
-    if (id_list)
-      return ChatRoomsCollection.find(
-        { _id: { $in: id_list } },
-        { fields: { messages: 0 } }
-      ).fetch();
-  },
-  remove_chatroom_in_server(chat_id) {
+  remove_chatroom_(chat_id) {
     const _id = Meteor.userId();
     ChatRoomsCollection.update({ _id: chat_id }, { $pull: { users_ids: _id } });
     const left_users = ChatRoomsCollection.findOne(

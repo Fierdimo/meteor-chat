@@ -12,7 +12,7 @@ export default function SendMessage({ chatId }: SendMessageT) {
   },[])
 
   function sendMessage() {
-    Meteor.call("sendMessage", chatId, messageText, (error) => {
+    Meteor.call("send_message", chatId, messageText, (error) => {
       if (error) {
         console.log(error.reason);
         return;

@@ -3,19 +3,20 @@ import "./conversation.css";
 
 type BubbleT = {
   data: {
-    message: string;
+    content: string;
     date: Date;
     user: string;
   };
 };
 
 export default function Bubble({ data }: BubbleT) {
-  const isMe = data.user === "me";
+  const { content, date, user } = data;
+  const isMe = user === Meteor.userId();
   const [image, setImage] = React.useState();
 
   React.useEffect(() => {
-    Meteor.call("get_user_image", data.user, (error, data) =>
-      error ? console.log(error.reason) : setImage(data)
+    Meteor.call("get_user_image", user, (error, image) =>
+      error ? console.log(error.reason) : setImage(image)
     );
   }, []);
 
@@ -38,8 +39,8 @@ export default function Bubble({ data }: BubbleT) {
           backgroundColor: isMe ? "#c5d86d" : "#4ba3c3",
         }}
       >
-        <p className="message-bubble">{data.message}</p>
-        <p className="date-bubble">{`${data.date.getHours()}:${data.date.getMinutes()} ${data.date.getDate()}/${data.date.getMonth()}/${data.date.getFullYear()} `}</p>
+        <p className="message-bubble">{content}</p>
+        <p className="date-bubble">{`${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${date.getMonth()}/${date.getFullYear()} `}</p>
       </div>
     </div>
   );

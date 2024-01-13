@@ -9,6 +9,12 @@ type ConversationT = {
   chatId: string;
 };
 
+type BubbleT = {
+  content: string;
+  date: Date;
+  user: string;
+};
+
 export default function Conversation({ chatId }: ConversationT) {
   const isLoading = useSubscribe("chatRooms");
   const conversation = useFind(() => {
@@ -26,13 +32,7 @@ export default function Conversation({ chatId }: ConversationT) {
         <div id="conversation">
           {conversation.length > 0 &&
             conversation.map((data, index) => {
-              const message = {
-                message: data.message,
-                date: data.date,
-                user: data.user,
-              };
-
-              return <Bubble key={index} data={message} />;
+              return <Bubble key={index} data={data as BubbleT} />;
             })}
           <div id="endScroll"></div>
         </div>
