@@ -7,6 +7,10 @@ type SendMessageT = {
 export default function SendMessage({ chatId }: SendMessageT) {
   const [messageText, setMessageText] = React.useState("");
 
+  React.useEffect(()=>{
+    document.getElementById("message-input")?.focus()
+  },[])
+
   function sendMessage() {
     Meteor.call("sendMessage", chatId, messageText, (error) => {
       if (error) {
@@ -20,6 +24,8 @@ export default function SendMessage({ chatId }: SendMessageT) {
     <div className="message-box">
       {chatId && (
         <input
+          className="message-input"
+          id="message-input"
           value={messageText}
           onChange={(e) => setMessageText(e.currentTarget.value)}
           onKeyUpCapture={(e) => e.key === "Enter" && sendMessage()}

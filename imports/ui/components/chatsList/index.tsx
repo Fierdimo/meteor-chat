@@ -6,12 +6,15 @@ import UserItemList from "../userItemList";
 import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
 import { chatListCollection } from "../../../api/chatsList/chatListCollection";
+import { ChatContext } from "../../context/chatContext";
 
 export default function ChatList() {
   const response = useTracker(() => {
     Meteor.subscribe("chatList");
     return chatListCollection.find().fetch();
   });
+  const { setChatId } = React.useContext(ChatContext);
+
 
   const menu = [
     {
@@ -35,7 +38,9 @@ export default function ChatList() {
           response[0].chats.map((chat) => {
             return (
               <MenuContextual key={chat.id} menu={menu}>
-                <UserItemList userId={chat.users_ids} />
+                <div onClick={()=> setChatId(chat.id)}>
+                  <UserItemList userId={chat.users_ids} />
+                </div>
               </MenuContextual>
             );
           })}

@@ -1,12 +1,14 @@
 .message-box {
     padding: 5px;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(168, 254, 225, 1) 51%, rgba(255, 255, 255, 0) 100%);
 }
-.message-box input {
+
+.message-box .message-input {
     width: 95%;
-    background: white;
-    border: none;
+    border: 2px;
+    background: radial-gradient(circle, rgba(255,255,255,0) 0%, rgb(58, 93, 133) 100%);
     padding: 15px 10px;
     border-radius: 20px;
-    box-shadow: #cff0ff 0px 10px 10px -5px;
+    box-shadow: 0px 10px 10px #cff0ff ;
     border-inline: 2px solid #cbd7da;
-  }
+}

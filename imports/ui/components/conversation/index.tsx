@@ -12,21 +12,20 @@ type ConversationT = {
 export default function Conversation({ chatId }: ConversationT) {
   const isLoading = useSubscribe("chatRooms");
   const conversation = useFind(() => {
-    return ChatRoomsCollection.find({ _id: chatId });
+    return ChatRoomsCollection.find(chatId);
   });
 
   React.useEffect(() => {
     const endScroll = document.getElementById("endScroll");
     endScroll?.scrollIntoView({ behavior: "instant" });
   }, []);
-  
+
   return (
     <>
       {chatId ? (
         <div id="conversation">
           {conversation.length > 0 &&
-            conversation.map((data, index) => {         
-
+            conversation.map((data, index) => {
               const message = {
                 message: data.message,
                 date: data.date,

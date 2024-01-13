@@ -2,10 +2,12 @@ import React from "react";
 import { useSnackbar } from "notistack";
 import UserItemList from "../userItemList";
 import { ChatType } from "../../selectors/types";
+import { ChatContext } from "../../context/chatContext";
 
 export default function SearchAContact() {
   const [userSearch, setUserSearch] = React.useState<string>("");
   const [userResults, setUserResults] = React.useState<ChatType[] | null>();
+  const { setChatId } = React.useContext(ChatContext);
   const { enqueueSnackbar } = useSnackbar();
 
   function search() {
@@ -35,10 +37,8 @@ export default function SearchAContact() {
     );
     if (!isPrevious) {
       const newId = await Meteor.callAsync("start_chat_with", contact_id);
-      console.log(newId);
-    } else console.log(isPrevious);
-
-    // open conversation
+      setChatId(newId);
+    } else setChatId(isPrevious.chat_id);
   }
 
   return (
