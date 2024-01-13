@@ -7,16 +7,20 @@
 }
 
 .home-container>header {
-    background-color: azure;
     grid-area: header;
 }
 
 .home-container>nav {
     grid-area: nav;
+    background-color: azure;
     overflow-y: auto;
     overflow-x: clip;
+    border: 5px solid rgba(141, 202, 230, 0.878);
+    border-radius: 20px;
     scrollbar-gutter: stable;
-    background: linear-gradient(90deg, rgba(38,46,51,1) 0%, rgba(108,110,111,1) 73%, rgba(38,46,51,1) 100%);
+    margin: 10px;
+    box-shadow: 10px 10px 10px rgba(120, 167, 189, 0.74);
+
 }
 
 .home-container>nav::-webkit-scrollbar {
@@ -33,7 +37,6 @@
 }
 
 .home-container>main {
-    background-color: rgb(38, 46, 51);
     grid-area: main;
     overflow-y: auto;
     overflow-x: clip;
@@ -41,7 +44,6 @@
 }
 
 .home-container>footer {
-    background-color: rgb(38, 46, 51);
     grid-area: footer;
 }
 

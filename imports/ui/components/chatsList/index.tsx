@@ -1,38 +1,17 @@
 import React from "react";
 
 import "./chatList.css";
-import "./avatar.css";
 import MenuContextual from "../menuContextual";
-
-type contactData = {
-  _id: number;
-  image: number;
-  name: string;
-  online: boolean;
-  lastSeen: Date;
-  subtitle: string;
-};
+import UserItemList from "../userItemList";
+import { Meteor } from "meteor/meteor";
+import { useTracker } from "meteor/react-meteor-data";
+import { chatListCollection } from "../../../api/chatsList/chatListCollection";
 
 export default function ChatList() {
-  const exampleData: contactData[] = [
-    {
-      _id: 1,
-      image: 1,
-      name: "personaje de fondo A",
-      online: true,
-      lastSeen: new Date(),
-      subtitle: "friend",
-    },
-  ];
-
-  const [shadowColor, setShadowColor] = React.useState("#0ac");
-  React.useEffect(() => {
-    document.documentElement.style.setProperty("--color0", shadowColor);
-  }, [shadowColor]);
-
-  function toggleColor() {
-    setShadowColor(shadowColor === "#0ac" ? "#01f" : "#0ac");
-  }
+  const response = useTracker(() => {
+    Meteor.subscribe("chatList");
+    return chatListCollection.find().fetch();
+  });
 
   const menu = [
     {
@@ -52,26 +31,14 @@ export default function ChatList() {
   return (
     <div className="list-wrapper">
       <ul className="list">
-        {[1, 2, 3].map((data) => {
-          return (
-            <MenuContextual key={data} menu={menu}>
-              <li className="list-item">
-                <div className="com">
-                  <a className="th">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/488320/profile/profile-80.jpg" />
-                  </a>
-                </div>
-                <div className="list-item-content">
-                  <h4>Hitesh Kumar</h4>
-                  <p>@hk-skit</p>
-                </div>
-                <div className="list-item-signals">
-                  <button onClick={() => toggleColor()}>color</button>
-                </div>
-              </li>
-            </MenuContextual>
-          );
-        })}
+        {response.length > 0 &&
+          response[0].chats.map((chat) => {
+            return (
+              <MenuContextual key={chat.id} menu={menu}>
+                <UserItemList userId={chat.users_ids} />
+              </MenuContextual>
+            );
+          })}
       </ul>
     </div>
   );

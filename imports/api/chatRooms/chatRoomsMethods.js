@@ -3,10 +3,10 @@ import { ChatRoomsCollection } from "./chatRoomsCollection";
 
 
 Meteor.methods({
-  add_chatroom_in_server({ contact, my_name }) {
-    const _id = Meteor.userId();
-    const users_ids = [_id, contact.id];
+  add_chatroom_in_server({ contact, my_name, chat_id }) {
+    const users_ids = [contact.id, Meteor.userId()];
     return ChatRoomsCollection.insert({
+      _id: chat_id,
       users_ids,
       messages: [],
       names: [contact.email.split("@", 1), my_name],

@@ -14,7 +14,7 @@ export default function Modal({ children, modalScreen }: ModalT) {
       <div onClick={() => setModalState("modal-open")}>{children}</div>
       <div className={modalState}>
         <div className={"modal"} onClick={() => setModalState("modal-close")}>
-          <div className="modal-content">
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <span
               className="close"
               onClick={() => setModalState("modal-close")}

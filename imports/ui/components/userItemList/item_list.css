@@ -1,25 +1,24 @@
 :root {
     --inset: 0.5vmin;
-    --color0: #0ac;
+    --color0: rgb(255, 255, 255);
     --color1: #222;
     --duration: 5s;
     --bgcolor0: #0aca;
     --bgcolor1: #222a;
 }
 
-.com {
+.shine {
     block-size: 7vmin;
     inline-size: 7vmin;
     display: grid;
     place-items: center;
     overflow: hidden;
     box-shadow: inset 0 0 10px black, 0 0 10px black;
-    filter: drop-shadow(0 0 10px var(--color0)) saturate(2);
     margin: 10px;
     border-radius: 50%;
 }
 
-.th {
+.clip {
     inline-size: 100%;
     block-size: 100%;
     overflow: hidden;
@@ -27,14 +26,14 @@
     border-radius: 50%;
 }
 
-.th img {
+.clip img {
     inline-size: 100%;
     block-size: 100%;
     object-fit: cover;
     border-radius: 50%;
 }
 
-.com::before {
+.shine::before {
     content: '';
     display: block;
     inline-size: 100%;
@@ -53,4 +52,50 @@
     100% {
         rotate: 1turn
     }
+}
+
+.user-list-item {
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px;
+    border-bottom: 2px solid rgba(233, 220, 220, 0.849);
+}
+
+.user-list-item:hover {
+    background-color: #aaaaaa2d;
+}
+
+.user-list-item h4 {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.user-list-item p {
+    margin-top: 5px;
+    color: #aaa;
+}
+
+.user-list-item:last-child {
+    border-bottom: none;
+}
+
+.user-list-item .list-item-content {
+    margin-left: 10px;
+}
+
+.user-list-item .list-item-content h4,
+p {
+    margin: 0;
+}
+
+.user-list-item .list-item-signals {
+    display: flex;
+    flex: auto;
+    justify-content: right;
+    align-items: center;
+    padding: 10px;
+
 }

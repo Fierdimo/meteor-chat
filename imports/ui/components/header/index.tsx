@@ -6,6 +6,7 @@ import AddAContact from "./addAContact";
 import Logout from "./logout";
 import Modal from "../modal";
 import SearchAContact from "../searchAContact";
+import { goUserOffline } from "../../selectors/loggedUserOnly";
 
 export default function Header() {
   return (
@@ -21,7 +22,13 @@ export default function Header() {
           </div>
         </Modal>
 
-        <div className="header-button" onClick={() => Meteor.logout()}>
+        <div
+          className="header-button"
+          onClick={() => {
+            goUserOffline();
+            Meteor.logout();
+          }}
+        >
           <Logout />
         </div>
       </div>
