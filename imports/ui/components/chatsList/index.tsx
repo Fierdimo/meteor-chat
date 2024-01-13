@@ -7,6 +7,10 @@ import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
 import { chatListCollection } from "../../../api/chatsList/chatListCollection";
 import { ChatContext } from "../../context/chatContext";
+import { PlatformContext } from "../../context/platformContext";
+import Modal from "../modal";
+import Conversation from "../conversation";
+import SendMessage from "../sendMessage";
 
 export default function ChatList() {
   const response = useTracker(() => {
@@ -14,7 +18,7 @@ export default function ChatList() {
     return chatListCollection.find().fetch();
   });
   const { setChatId } = React.useContext(ChatContext);
-
+  const { isMobile } = React.useContext(PlatformContext);
 
   const menu = [
     {
@@ -38,9 +42,22 @@ export default function ChatList() {
           response[0].chats.map((chat) => {
             return (
               <MenuContextual key={chat.id} menu={menu}>
-                <div onClick={()=> setChatId(chat.id)}>
-                  <UserItemList userId={chat.users_ids} />
-                </div>
+                {isMobile ? (
+                  <Modal
+                    modalScreen={
+                      <>
+                        <Conversation chatId={chat.id} />
+                        <SendMessage chatId={chat.id} />
+                      </>
+                    }
+                  >
+                    <UserItemList userId={chat.users_ids} />
+                  </Modal>
+                ) : (
+                  <div onClick={() => setChatId(chat.id)}>
+                    <UserItemList userId={chat.users_ids} />
+                  </div>
+                )}
               </MenuContextual>
             );
           })}
