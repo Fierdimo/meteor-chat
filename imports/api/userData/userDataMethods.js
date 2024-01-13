@@ -68,7 +68,7 @@ Meteor.methods({
       .fetch();
   },
   get_user_image(_id) {
-    return Meteor.users({ _id }, { image: 1 }).image;
+    return Meteor.users.findOne({ _id }, { image: 1 })?.image;
   },
   get_user_chat_list_id(user_id) {
     return Meteor.users.findOne(user_id, {

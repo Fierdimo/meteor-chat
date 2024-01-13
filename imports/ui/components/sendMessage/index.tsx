@@ -29,6 +29,7 @@ export default function SendMessage({ chatId }: SendMessageT) {
           value={messageText}
           onChange={(e) => setMessageText(e.currentTarget.value)}
           onKeyUpCapture={(e) => e.key === "Enter" && sendMessage()}
+          placeholder="Your message here"
         />
       )}
     </div>

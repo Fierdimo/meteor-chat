@@ -6,9 +6,15 @@
 .message-box .message-input {
     width: 95%;
     border: 2px;
-    background: radial-gradient(circle, rgba(255,255,255,0) 0%, rgb(58, 93, 133) 100%);
+    background: radial-gradient(circle, rgba(88, 80, 80, 0) 0%, rgba(201, 221, 245, 0.747) 100%);
     padding: 15px 10px;
     border-radius: 20px;
     box-shadow: 0px 10px 10px #cff0ff ;
     border-inline: 2px solid #cbd7da;
 }
+
+.message-box .message-input::placeholder {
+    color: rgb(88, 88, 88);
+    font-style: italic;
+    align-self: center;
+  }

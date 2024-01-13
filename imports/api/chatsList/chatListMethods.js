@@ -6,6 +6,8 @@ Meteor.methods({
   start_chat_with(contact_id) {
     const users_ids = [contact_id, Meteor.userId()];
     var my_chat_id = "";
+    const id = Random.id();
+
     users_ids.forEach((user_id) => {
       var chatListId = Meteor.call("get_user_chat_list_id", user_id);
       if (!chatListId) {
@@ -17,8 +19,7 @@ Meteor.methods({
         Meteor.call("set_chat_list", user_id, chatListId);
       }
 
-      //add chat to personal list of chats
-      const id = Random.id();
+      //add chat to personal list of chats      
       if (user_id === Meteor.userId()) my_chat_id = id;
       const chat = {
         id,

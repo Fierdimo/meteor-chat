@@ -1,5 +1,6 @@
 import React from "react";
 import "./conversation.css";
+import { imageSet } from "../../misc/imageSet";
 
 type BubbleT = {
   data: {
@@ -12,7 +13,7 @@ type BubbleT = {
 export default function Bubble({ data }: BubbleT) {
   const { content, date, user } = data;
   const isMe = user === Meteor.userId();
-  const [image, setImage] = React.useState();
+  const [image, setImage] = React.useState<number>(0);
 
   React.useEffect(() => {
     Meteor.call("get_user_image", user, (error, image) =>
@@ -30,7 +31,7 @@ export default function Bubble({ data }: BubbleT) {
       }}
     >
       <div className="image-capsule">
-        <img src={image} className="image-bubble" />
+        <img src={imageSet[image]} className="image-bubble" />
       </div>
       <div
         className="container-bubble"

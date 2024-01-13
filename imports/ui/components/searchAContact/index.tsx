@@ -37,7 +37,10 @@ export default function SearchAContact() {
     );
     if (!isPrevious) {
       const newId = await Meteor.callAsync("start_chat_with", contact_id);
-      Meteor.call("add_chatroom", contact_id, newId )
+      Meteor.call("add_chatroom", contact_id, newId,(error)=>{
+        if(error)enqueueSnackbar(error.reason, { variant: "error" });
+        else enqueueSnackbar("Started a new conversation", { variant: "info" });
+      } )
       setChatId(newId);
     } else setChatId(isPrevious.chat_id);
   }

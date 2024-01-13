@@ -7,8 +7,11 @@ import Logout from "./logout";
 import Modal from "../modal";
 import SearchAContact from "../searchAContact";
 import { goUserOffline } from "../../selectors/loggedUserOnly";
+import { ChatContext } from "../../context/chatContext";
 
 export default function Header() {
+  const { setChatId } = React.useContext(ChatContext); 
+
   return (
     <div className="header-container">
       <div className="logo">
@@ -27,6 +30,7 @@ export default function Header() {
           onClick={() => {
             goUserOffline();
             Meteor.logout();
+            setChatId(null)
           }}
         >
           <Logout />

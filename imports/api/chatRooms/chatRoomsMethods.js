@@ -3,8 +3,9 @@ import { ChatRoomsCollection } from "./chatRoomsCollection";
 
 
 Meteor.methods({
-  add_chatroom({ contact_id, chat_id }) {
+  add_chatroom( contact_id, chat_id ) {
     const users_ids = [contact_id, Meteor.userId()];
+    console.log("create chatroom")
     return ChatRoomsCollection.insert({
       _id: chat_id,
       users_ids,

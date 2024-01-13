@@ -1,6 +1,7 @@
 import React from "react";
 import "./item_list.css";
 import { useTracker } from "meteor/react-meteor-data";
+import { imageSet } from "../../misc/imageSet";
 
 type userItem = {
   userId: string | string[];
@@ -43,7 +44,7 @@ export default function UserItemList({ userId }: userItem) {
         }}
       >
         <a className="clip">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/488320/profile/profile-80.jpg" />
+          <img src={imageSet[contactData?.image]} />
         </a>
       </div>
       <div className="list-item-content">
